@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  MainViewController.h
 //  Daps
 //
 //  Created by Kirby Kohlmorgen on 12/1/14.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface MainViewController : UIViewController
 
-@property (strong, nonatomic) UIWindow *window;
 
 @end
+
