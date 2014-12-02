@@ -19,23 +19,19 @@
     [super viewDidLoad];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor emerlandColor];
     
     self.cellColors = @[[UIColor turquoiseColor],
-                        [UIColor greenSeaColor],
-                        [UIColor emerlandColor],
-                        [UIColor nephritisColor],
-                        [UIColor peterRiverColor],
-                        [UIColor belizeHoleColor],
                         [UIColor amethystColor],
-                        [UIColor wisteriaColor],
-                        [UIColor wetAsphaltColor],
-                        [UIColor midnightBlueColor],
-                        [UIColor sunflowerColor],
-                        [UIColor tangerineColor],
-                        [UIColor carrotColor],
-                        [UIColor pumpkinColor],
+                        [UIColor belizeHoleColor],
                         [UIColor alizarinColor],
-                        [UIColor pomegranateColor]];
+                        [UIColor peterRiverColor],
+                        [UIColor carrotColor],
+                        [UIColor sunflowerColor],
+                        [UIColor wisteriaColor],
+                        [UIColor pomegranateColor],
+                        [UIColor greenSeaColor],
+                        [UIColor wetAsphaltColor]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
