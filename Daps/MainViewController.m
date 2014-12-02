@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "LoginViewController.h"
+#import "FriendsTableViewController.h"
 
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
@@ -39,6 +40,10 @@
         LoginViewController *loginViewController = [[LoginViewController alloc] init];
         [self presentViewController:loginViewController animated:YES completion:nil];
     } else {
+        FriendsTableViewController *friendsTableViewController = [[FriendsTableViewController alloc] init];
+        [self presentViewController:friendsTableViewController animated:YES completion:nil];
+
+        
         FBRequest *request = [FBRequest requestForMe];
         [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {

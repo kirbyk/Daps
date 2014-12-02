@@ -47,6 +47,7 @@
 		4E48D2101A2D3BC8003244FA /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1FC1A2D3BC8003244FA /* UITableViewCell+FlatUI.m */; };
 		4E48D2111A2D3BC8003244FA /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1FE1A2D3BC8003244FA /* UIToolbar+FlatUI.m */; };
 		4EDEF06E1A2D590D0026997E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EDEF06D1A2D590D0026997E /* Images.xcassets */; };
+		4EDEF0771A2D5E930026997E /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,8 @@
 		4E48D2151A2D3BF8003244FA /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		4E48D2161A2D3BF8003244FA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4EDEF06D1A2D590D0026997E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4EDEF0751A2D5E930026997E /* FriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewController.h; sourceTree = "<group>"; };
+		4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,8 @@
 				4E48D1931A2D3292003244FA /* AppDelegate.m */,
 				4E48D1951A2D3292003244FA /* MainViewController.h */,
 				4E48D1961A2D3292003244FA /* MainViewController.m */,
+				4EDEF0751A2D5E930026997E /* FriendsTableViewController.h */,
+				4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */,
 				4E48D1D41A2D3B0D003244FA /* LoginViewController.h */,
 				4E48D1D51A2D3B0D003244FA /* LoginViewController.m */,
 				4E48D1D71A2D3BAF003244FA /* External */,
@@ -422,6 +427,7 @@
 				4E48D1D61A2D3B0D003244FA /* LoginViewController.m in Sources */,
 				4E48D2071A2D3BC8003244FA /* UIColor+FlatUI.m in Sources */,
 				4E48D2051A2D3BC8003244FA /* FUITextField.m in Sources */,
+				4EDEF0771A2D5E930026997E /* FriendsTableViewController.m in Sources */,
 				4E48D2111A2D3BC8003244FA /* UIToolbar+FlatUI.m in Sources */,
 				4E48D20A1A2D3BC8003244FA /* UINavigationBar+FlatUI.m in Sources */,
 				4E48D2001A2D3BC8003244FA /* FUIButton.m in Sources */,
