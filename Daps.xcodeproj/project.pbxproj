@@ -10,7 +10,6 @@
 		4E48D1911A2D3292003244FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1901A2D3292003244FA /* main.m */; };
 		4E48D1941A2D3292003244FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1931A2D3292003244FA /* AppDelegate.m */; };
 		4E48D1971A2D3292003244FA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1961A2D3292003244FA /* MainViewController.m */; };
-		4E48D19C1A2D3292003244FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E48D19B1A2D3292003244FA /* Images.xcassets */; };
 		4E48D1AB1A2D3292003244FA /* DapsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1AA1A2D3292003244FA /* DapsTests.m */; };
 		4E48D1B91A2D372D003244FA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E48D1B51A2D372D003244FA /* Bolts.framework */; };
 		4E48D1BA1A2D372D003244FA /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E48D1B61A2D372D003244FA /* ParseFacebookUtils.framework */; };
@@ -47,6 +46,7 @@
 		4E48D20F1A2D3BC8003244FA /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1FA1A2D3BC8003244FA /* UITabBar+FlatUI.m */; };
 		4E48D2101A2D3BC8003244FA /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1FC1A2D3BC8003244FA /* UITableViewCell+FlatUI.m */; };
 		4E48D2111A2D3BC8003244FA /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E48D1FE1A2D3BC8003244FA /* UIToolbar+FlatUI.m */; };
+		4EDEF06E1A2D590D0026997E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EDEF06D1A2D590D0026997E /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +67,6 @@
 		4E48D1931A2D3292003244FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4E48D1951A2D3292003244FA /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4E48D1961A2D3292003244FA /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		4E48D19B1A2D3292003244FA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4E48D1A41A2D3292003244FA /* DapsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DapsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E48D1A91A2D3292003244FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E48D1AA1A2D3292003244FA /* DapsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DapsTests.m; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 		4E48D2141A2D3BF8003244FA /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		4E48D2151A2D3BF8003244FA /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		4E48D2161A2D3BF8003244FA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		4EDEF06D1A2D590D0026997E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +194,8 @@
 				4E48D1961A2D3292003244FA /* MainViewController.m */,
 				4E48D1D41A2D3B0D003244FA /* LoginViewController.h */,
 				4E48D1D51A2D3B0D003244FA /* LoginViewController.m */,
-				4E48D19B1A2D3292003244FA /* Images.xcassets */,
 				4E48D1D71A2D3BAF003244FA /* External */,
+				4EDEF06D1A2D590D0026997E /* Images.xcassets */,
 				4E48D18E1A2D3292003244FA /* Supporting Files */,
 			);
 			path = Daps;
@@ -395,7 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E48D19C1A2D3292003244FA /* Images.xcassets in Resources */,
+				4EDEF06E1A2D590D0026997E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iOS Development: Kirby Kohlmorgen (TBKN645J8A)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -549,6 +550,7 @@
 				INFOPLIST_FILE = Daps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -556,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iOS Development: Kirby Kohlmorgen (TBKN645J8A)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,6 +568,7 @@
 				INFOPLIST_FILE = Daps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
