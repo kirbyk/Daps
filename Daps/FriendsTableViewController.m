@@ -7,6 +7,7 @@
 //
 
 #import "FriendsTableViewController.h"
+#import "UIColor+FlatUI.h"
 
 @interface FriendsTableViewController ()
 
@@ -17,11 +18,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.cellColors = @[[UIColor turquoiseColor],
+                        [UIColor greenSeaColor],
+                        [UIColor emerlandColor],
+                        [UIColor nephritisColor],
+                        [UIColor peterRiverColor],
+                        [UIColor belizeHoleColor],
+                        [UIColor amethystColor],
+                        [UIColor wisteriaColor],
+                        [UIColor wetAsphaltColor],
+                        [UIColor midnightBlueColor],
+                        [UIColor sunflowerColor],
+                        [UIColor tangerineColor],
+                        [UIColor carrotColor],
+                        [UIColor pumpkinColor],
+                        [UIColor alizarinColor],
+                        [UIColor pomegranateColor]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -31,14 +45,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;
+    return 33;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Test");
+    NSInteger currentCellColorIndex = indexPath.item % self.cellColors.count;
+    UIColor *currentCellColor = self.cellColors[currentCellColorIndex];
+    
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = @"Amy";
+    cell.textLabel.text = [@"Amy" uppercaseString];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:40.0];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.contentView.backgroundColor = currentCellColor;
     
     return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 90.0;
+}
+
 
 @end
