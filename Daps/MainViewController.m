@@ -52,6 +52,7 @@
                 self.userData = (NSDictionary *)result;
                 
                 NSString *name = self.userData[@"name"];
+                [user setObject:name forKeyedSubscript:@"name"];
                 //NSString *facebookID = self.userData[@"id"];
                 //NSString *location = self.userData[@"location"][@"name"];
                 //NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];

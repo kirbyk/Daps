@@ -11,5 +11,6 @@
 @interface FriendsTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *cellColors;
+@property (nonatomic, strong) NSArray *friends;
 
 @end
