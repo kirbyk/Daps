@@ -54,6 +54,11 @@
                      @"Zach Price"];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"%@", NSStringFromCGRect(self.view.frame));
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;

@@ -43,7 +43,6 @@
         FriendsTableViewController *friendsTableViewController = [[FriendsTableViewController alloc] init];
         [self presentViewController:friendsTableViewController animated:YES completion:nil];
 
-        
         FBRequest *request = [FBRequest requestForMe];
         [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
@@ -53,6 +52,7 @@
                 
                 NSString *name = self.userData[@"name"];
                 [user setObject:name forKeyedSubscript:@"name"];
+                [user saveInBackground];
                 //NSString *facebookID = self.userData[@"id"];
                 //NSString *location = self.userData[@"location"][@"name"];
                 //NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
