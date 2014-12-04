@@ -8,14 +8,14 @@
 
 #import "MainViewController.h"
 #import "LoginViewController.h"
-#import "FriendsTableViewController.h"
 
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface MainViewController ()
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSDictionary *userData;
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation MainViewController
@@ -23,6 +23,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // table view setup
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -32,17 +41,14 @@
 
 - (void)refreshUserData
 {
-    // Get the cached active user
+    // get the cached active user
     PFUser *user = [PFUser currentUser];
     
-    // If there is no active user, prompt login
+    // if there is no active user, prompt login
     if (!user) {
         LoginViewController *loginViewController = [[LoginViewController alloc] init];
         [self presentViewController:loginViewController animated:YES completion:nil];
     } else {
-        FriendsTableViewController *friendsTableViewController = [[FriendsTableViewController alloc] init];
-        [self presentViewController:friendsTableViewController animated:YES completion:nil];
-
         FBRequest *request = [FBRequest requestForMe];
         [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
@@ -63,5 +69,22 @@
         }];
     }
 }
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
+    cell.textLabel.text = @"hello";
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
 
 @end
