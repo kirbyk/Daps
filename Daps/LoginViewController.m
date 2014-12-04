@@ -41,7 +41,8 @@
 
 - (void)loginWithFacebook
 {
-    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+    NSArray *permissions = [NSArray arrayWithObjects:@"public_profile", @"email", @"user_friends", nil];
+    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
         if (!user) {
             NSLog(@"The user cancelled the Facebook login. %@", error);
         } else if (user.isNew) {

@@ -52,6 +52,7 @@
 		89D953B81A2FFAED00D01760 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9539F1A2FFAED00D01760 /* UITabBar+FlatUI.m */; };
 		89D953B91A2FFAED00D01760 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D953A11A2FFAED00D01760 /* UITableViewCell+FlatUI.m */; };
 		89D953BA1A2FFAED00D01760 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D953A31A2FFAED00D01760 /* UIToolbar+FlatUI.m */; };
+		89D953BE1A2FFBBA00D01760 /* FriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D953BD1A2FFBBA00D01760 /* FriendsTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,8 @@
 		89D953A11A2FFAED00D01760 /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
 		89D953A21A2FFAED00D01760 /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
 		89D953A31A2FFAED00D01760 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
+		89D953BC1A2FFBBA00D01760 /* FriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewCell.h; sourceTree = "<group>"; };
+		89D953BD1A2FFBBA00D01760 /* FriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +206,7 @@
 				4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */,
 				4E48D1D41A2D3B0D003244FA /* LoginViewController.h */,
 				4E48D1D51A2D3B0D003244FA /* LoginViewController.m */,
+				89D953BB1A2FFB9300D01760 /* Views */,
 				89A569BE1A2E7FD40001D91E /* Images.xcassets */,
 				89D953771A2FFAED00D01760 /* External */,
 				4E48D18E1A2D3292003244FA /* Supporting Files */,
@@ -316,6 +320,15 @@
 			path = FlatUIKit;
 			sourceTree = "<group>";
 		};
+		89D953BB1A2FFB9300D01760 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				89D953BC1A2FFBBA00D01760 /* FriendsTableViewCell.h */,
+				89D953BD1A2FFBBA00D01760 /* FriendsTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -419,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89D953B31A2FFAED00D01760 /* UINavigationBar+FlatUI.m in Sources */,
+				89D953BE1A2FFBBA00D01760 /* FriendsTableViewCell.m in Sources */,
 				89D953A51A2FFAED00D01760 /* FUIButton.m in Sources */,
 				89D953A61A2FFAED00D01760 /* FUICellBackgroundView.m in Sources */,
 				4E48D1D61A2D3B0D003244FA /* LoginViewController.m in Sources */,
