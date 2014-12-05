@@ -13,7 +13,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-#import "SDWebImageDownloader.h"
+#import "UIImageView+WebCache.h"
 
 @interface MainViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) NSDictionary *userData;
@@ -26,12 +26,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
     
     // data source
     self.friendData = [NSMutableArray array];
     
-    // table view setup
+    // collection view setup
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0.0;
+    layout.minimumLineSpacing = 0.0;
+    
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -84,9 +88,13 @@
                 }
                 
 #warning add more friends (this is adding Kirby i times)
-                for (int i = 0; i < 2; i++) {
-                    [self.friendData addObject:[self.friendData objectAtIndex:0]];
-                }
+                [self.friendData addObject:self.userData];
+                [self.friendData addObject:self.userData];
+                [self.friendData addObject:[self.friendData objectAtIndex:0]];
+                [self.friendData addObject:[self.friendData objectAtIndex:0]];
+                [self.friendData addObject:self.userData];
+                [self.friendData addObject:self.userData];
+                [self.friendData addObject:[self.friendData objectAtIndex:0]];
                 
                 [self.collectionView reloadData];
                 
@@ -97,15 +105,9 @@
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return [self.friendData count];
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section % 2 == 0) return 2;
-    else return 3;
+    return [self.friendData count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -114,25 +116,15 @@
     
     // need to determine whether content should be drawn left, center, or right
     
-    if (indexPath.section % 2 == 0) cell.backgroundColor = [UIColor blueColor];
-    else cell.backgroundColor = [UIColor orangeColor];
+    //if (indexPath.section % 2 == 0) cell.backgroundColor = [UIColor blueColor];
+    //else cell.backgroundColor = [UIColor orangeColor];
     
-    NSString *facebookID = [[self.friendData objectAtIndex:0] objectForKey:@"id"];
+    NSString *facebookID = [[self.friendData objectAtIndex:indexPath.row] objectForKey:@"id"];
     NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+    [cell.imageView sd_setImageWithURL:imageURL];
     
-    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:imageURL
-                                                        options:0
-                                                       progress:^(NSInteger receivedSize, NSInteger expectedSize)
-     {
-         // progression tracking code
-     }
-                                                      completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
-     {
-         if (image && finished)
-         {
-             NSLog(@"got image");
-         }
-     }];
+    cell.name = [[self.friendData objectAtIndex:indexPath.row] objectForKey:@"name"];
+
     
     
     return cell;
@@ -142,14 +134,8 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section % 2 == 0) return CGSizeMake(CGRectGetWidth(self.view.frame)/2.0, 100);
-    else return CGSizeMake(CGRectGetWidth(self.view.frame)/3.0, 100);
+    if (indexPath.section % 2 == 0) return CGSizeMake(CGRectGetWidth(self.view.frame)/2.0, CGRectGetWidth(self.view.frame)/2.0);
+    else return CGSizeMake(CGRectGetWidth(self.view.frame)/2.0, CGRectGetWidth(self.view.frame)/2.0);
 }
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0.0;
-}
-
 
 @end

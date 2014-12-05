@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FriendsCollectionViewCell : UICollectionViewCell
-
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) NSString *name;
 @end
