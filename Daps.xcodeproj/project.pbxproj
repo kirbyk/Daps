@@ -27,6 +27,7 @@
 		4E99773D1A2E410100A64CFE /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9977391A2E410100A64CFE /* ParseFacebookUtils.framework */; };
 		4E99773E1A2E410100A64CFE /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E99773A1A2E410100A64CFE /* ParseUI.framework */; };
 		4E9977401A2E412B00A64CFE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E99773F1A2E412B00A64CFE /* FacebookSDK.framework */; };
+		4EA7C0001A350AA500F4CB77 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7BFFF1A350AA500F4CB77 /* Info.plist */; };
 		4EDEF0771A2D5E930026997E /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */; };
 		89A569BF1A2E7FD40001D91E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A569BE1A2E7FD40001D91E /* Images.xcassets */; };
 		89B3D6301A30E85F00A26540 /* FriendsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B3D62F1A30E85F00A26540 /* FriendsCollectionViewCell.m */; };
@@ -83,7 +84,6 @@
 
 /* Begin PBXFileReference section */
 		4E48D18B1A2D3292003244FA /* Daps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daps.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E48D18F1A2D3292003244FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E48D1901A2D3292003244FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4E48D1921A2D3292003244FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4E48D1931A2D3292003244FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -109,6 +109,7 @@
 		4E9977391A2E410100A64CFE /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		4E99773A1A2E410100A64CFE /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		4E99773F1A2E412B00A64CFE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		4EA7BFFF1A350AA500F4CB77 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EDEF0751A2D5E930026997E /* FriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewController.h; sourceTree = "<group>"; };
 		4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewController.m; sourceTree = "<group>"; };
 		89A569BE1A2E7FD40001D91E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -266,7 +267,7 @@
 		4E48D18E1A2D3292003244FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4E48D18F1A2D3292003244FA /* Info.plist */,
+				4EA7BFFF1A350AA500F4CB77 /* Info.plist */,
 				4E48D1901A2D3292003244FA /* main.m */,
 			);
 			name = "Supporting Files";
@@ -501,6 +502,7 @@
 			files = (
 				89A569BF1A2E7FD40001D91E /* Images.xcassets in Resources */,
 				89D953AC1A2FFAED00D01760 /* Lato-Italic.ttf in Resources */,
+				4EA7C0001A350AA500F4CB77 /* Info.plist in Resources */,
 				89D953AE1A2FFAED00D01760 /* Lato-Regular.ttf in Resources */,
 				89D953AB1A2FFAED00D01760 /* Lato-Bold.ttf in Resources */,
 				89D953AD1A2FFAED00D01760 /* Lato-Light.ttf in Resources */,
@@ -667,7 +669,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Austin Louden (TSG5K89BMR)";
+				CODE_SIGN_IDENTITY = "iOS Development: Kirby Kohlmorgen (TBKN645J8A)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kirby/Downloads/parse-library-1.5.0",
@@ -687,7 +689,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Austin Louden (TSG5K89BMR)";
+				CODE_SIGN_IDENTITY = "iOS Development: Kirby Kohlmorgen (TBKN645J8A)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kirby/Downloads/parse-library-1.5.0",

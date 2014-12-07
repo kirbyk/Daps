@@ -138,4 +138,15 @@
     else return CGSizeMake(CGRectGetWidth(self.view.frame)/2.0, CGRectGetWidth(self.view.frame)/2.0);
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Daps sent\nfrom: %@\nto: %@",
+          [self.userData objectForKey:@"id"],
+          [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"]);
+    
+    PFObject *daps = [PFObject objectWithClassName:@"Daps"];
+    daps[@"from"] = [self.userData objectForKey:@"id"];
+    daps[@"to"] = [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"];
+    [daps saveInBackground];
+}
+
 @end
