@@ -29,6 +29,7 @@
 		4E9977401A2E412B00A64CFE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E99773F1A2E412B00A64CFE /* FacebookSDK.framework */; };
 		4EA7C0001A350AA500F4CB77 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7BFFF1A350AA500F4CB77 /* Info.plist */; };
 		4EDEF0771A2D5E930026997E /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */; };
+		8960CAE01A350DA1009EC0F0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8960CADF1A350DA1009EC0F0 /* ProfileViewController.m */; };
 		89A569BF1A2E7FD40001D91E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A569BE1A2E7FD40001D91E /* Images.xcassets */; };
 		89B3D6301A30E85F00A26540 /* FriendsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B3D62F1A30E85F00A26540 /* FriendsCollectionViewCell.m */; };
 		89B3D6531A30EE6100A26540 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B3D6331A30EE6100A26540 /* MKAnnotationView+WebCache.m */; };
@@ -112,6 +113,8 @@
 		4EA7BFFF1A350AA500F4CB77 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EDEF0751A2D5E930026997E /* FriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewController.h; sourceTree = "<group>"; };
 		4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewController.m; sourceTree = "<group>"; };
+		8960CADE1A350DA1009EC0F0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		8960CADF1A350DA1009EC0F0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		89A569BE1A2E7FD40001D91E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		89B3D62E1A30E85F00A26540 /* FriendsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsCollectionViewCell.h; sourceTree = "<group>"; };
 		89B3D62F1A30E85F00A26540 /* FriendsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsCollectionViewCell.m; sourceTree = "<group>"; };
@@ -252,6 +255,8 @@
 				4E48D1931A2D3292003244FA /* AppDelegate.m */,
 				4E48D1951A2D3292003244FA /* MainViewController.h */,
 				4E48D1961A2D3292003244FA /* MainViewController.m */,
+				8960CADE1A350DA1009EC0F0 /* ProfileViewController.h */,
+				8960CADF1A350DA1009EC0F0 /* ProfileViewController.m */,
 				4EDEF0751A2D5E930026997E /* FriendsTableViewController.h */,
 				4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */,
 				4E48D1D41A2D3B0D003244FA /* LoginViewController.h */,
@@ -527,6 +532,7 @@
 				89B3D6621A30EE6100A26540 /* UIView+WebCacheOperation.m in Sources */,
 				89D953A51A2FFAED00D01760 /* FUIButton.m in Sources */,
 				89B3D6611A30EE6100A26540 /* UIImageView+WebCache.m in Sources */,
+				8960CAE01A350DA1009EC0F0 /* ProfileViewController.m in Sources */,
 				89D953A61A2FFAED00D01760 /* FUICellBackgroundView.m in Sources */,
 				4E48D1D61A2D3B0D003244FA /* LoginViewController.m in Sources */,
 				89B3D6541A30EE6100A26540 /* NSData+ImageContentType.m in Sources */,

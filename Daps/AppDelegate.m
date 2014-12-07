@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 
 #import "MainViewController.h"
+#import "ProfileViewController.h"
+
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
@@ -37,8 +39,18 @@
     
     [self.window makeKeyAndVisible];
     
-    MainViewController *viewController = [[MainViewController alloc] init];
-    self.window.rootViewController = viewController;
+    self.currentPage = 0;
+    
+    UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    pageViewController.dataSource = self;
+    pageViewController.delegate = self;
+    
+    MainViewController *mainViewController = [[MainViewController alloc] init];
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+    self.viewControllers = [NSArray arrayWithObjects:mainViewController, profileViewController, nil];
+    [pageViewController setViewControllers:@[mainViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    self.window.rootViewController = pageViewController;
     
     return YES;
 }
@@ -97,5 +109,30 @@
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];
 }
+
+#pragma mark - UIPageViewControllerDataSource
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    if (self.currentPage == 0) return nil;
+    else return [self.viewControllers objectAtIndex:0];
+}
+
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    if (self.currentPage == 1) return nil;
+    else return [self.viewControllers objectAtIndex:1];
+}
+
+#pragma mark - UIPageViewControllerDelegate
+
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (self.currentPage == 0) self.currentPage = 1;
+    else self.currentPage = 1;
+}
+
+
 
 @end
