@@ -29,23 +29,25 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;
     
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), 90.0)];
+    headerView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:headerView];
+    
+    self.mainNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, CGRectGetWidth(self.view.frame), 45)];
+    self.mainNameLabel.textColor = [UIColor whiteColor];
+    self.mainNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:42.0];
+    [headerView addSubview:self.mainNameLabel];
+    
+    self.dapsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.mainNameLabel.frame)-8.0, CGRectGetWidth(self.view.frame), 45)];
+    self.dapsCountLabel.textColor = [UIColor redColor];
+    self.dapsCountLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:42.0];
+    [headerView addSubview:self.dapsCountLabel];
+    
     // setup main profile picture
-    self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0, 20.0, 80.0, 80.0)];
+    self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0, 200.0, 80.0, 80.0)];
     self.mainImageView.layer.cornerRadius = 5.0;
     self.mainImageView.layer.masksToBounds = YES;
     [self.view addSubview:self.mainImageView];
-    
-    // name label
-    self.mainNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mainImageView.frame) + 20.0, CGRectGetMinY(self.mainImageView.frame) + 10.0, CGRectGetWidth(self.view.frame) - CGRectGetMaxX(self.mainImageView.frame) - 20, 30.0)];
-    self.mainNameLabel.textColor = [UIColor colorWithWhite:(25.0f/255.0f) alpha:1.0];
-    self.mainNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
-    [self.view addSubview:self.mainNameLabel];
-    
-    // daps count label
-    self.dapsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.mainNameLabel.frame), CGRectGetMaxY(self.mainNameLabel.frame), CGRectGetWidth(self.view.frame), 20.0)];
-    self.dapsCountLabel.textColor = [UIColor colorWithWhite:(65.0f/255.0f) alpha:1.0];
-    self.dapsCountLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
-    [self.view addSubview:self.dapsCountLabel];
     
 }
 
@@ -69,7 +71,7 @@
             self.mainNameLabel.attributedText = attributedString;
             
             NSMutableAttributedString *attributedCount;
-            attributedCount = [[NSMutableAttributedString alloc] initWithString:@"107 daps from 45 friends"];
+            attributedCount = [[NSMutableAttributedString alloc] initWithString:@"107"];
             [attributedCount addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedCount length])];
             self.dapsCountLabel.attributedText = attributedCount;
             
@@ -77,6 +79,9 @@
             [query whereKey:@"facebookId" equalTo:facebookID];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
+                    
+                    NSLog(@"%@", objects);
+                    
                     NSMutableDictionary *fromCounts = [objects[0] objectForKey:@"fromCounts"];
                     NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
                     

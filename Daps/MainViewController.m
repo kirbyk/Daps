@@ -16,6 +16,8 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "UIImageView+WebCache.h"
 
+#define HEADER_HEIGHT 90
+
 @interface MainViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) NSDictionary *userData;
 @property (nonatomic, strong) NSMutableArray *friendData;
@@ -27,8 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
-    self.navigationController.navigationBar.hidden = YES;
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // data source
     self.friendData = [NSMutableArray array];
@@ -44,7 +45,9 @@
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
+    
     [self.collectionView registerClass:[FriendsCollectionViewCell class] forCellWithReuseIdentifier:@"friendCellIdentifier"];
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -129,8 +132,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section % 2 == 0) return CGSizeMake(CGRectGetWidth(self.view.frame)/2.0, CGRectGetWidth(self.view.frame)/2.0);
-    else return CGSizeMake(CGRectGetWidth(self.view.frame)/2.0, CGRectGetWidth(self.view.frame)/2.0);
+    return CGSizeMake(CGRectGetWidth(self.view.frame)/3.0, CGRectGetWidth(self.view.frame)/3.0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,6 +142,48 @@
     [self incrementAndSendFromCountFrom:fromId to:toId];
     [self incrementAndSendToCountFrom:fromId to:toId];
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(CGRectGetWidth(self.view.frame), HEADER_HEIGHT);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+    
+        UICollectionReusableView *headerView = [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+        
+        headerView.backgroundColor = [UIColor blackColor];
+        for (UIView *subview in [headerView subviews]) [subview removeFromSuperview];
+        
+        NSMutableAttributedString *attributedString;
+        attributedString = [[NSMutableAttributedString alloc] initWithString:@"Friends"];
+        [attributedString addAttribute:NSKernAttributeName value:@(-2) range:NSMakeRange(0, [attributedString length])];
+        
+        UILabel *lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, CGRectGetWidth(self.view.frame), 45)];
+        lblHeader.textColor = [UIColor whiteColor];
+        lblHeader.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:42.0];
+        lblHeader.attributedText = attributedString;
+        [headerView addSubview:lblHeader];
+        
+        UILabel *countHeader = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(lblHeader.frame)-8.0, CGRectGetWidth(self.view.frame), 45)];
+        countHeader.textColor = [UIColor redColor];
+        countHeader.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:42.0];
+        countHeader.text = [NSString stringWithFormat:@"%d", (int)[self.friendData count]];
+        [headerView addSubview:countHeader];
+        
+        reusableview = headerView;
+
+        
+    }
+    
+    return reusableview;
+}
+
+#pragma mark - Model Methods
 
 - (void)incrementAndSendToCountFrom:(NSString *)fromId to:(NSString *)toId {
     PFQuery *query = [PFQuery queryWithClassName:@"Daps"];
