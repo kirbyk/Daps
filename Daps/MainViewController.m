@@ -101,6 +101,18 @@
             }
         }];
     }
+    
+    NSDictionary *topFrom = [user objectForKey:@"topFrom"];
+    NSDictionary *none = [[NSDictionary alloc] init];
+    [user setObject:none forKey:@"topFrom"];
+    [user saveInBackground];
+    NSLog(@"topFrom: %@", topFrom);
+    if([topFrom count] == 0) {
+        NSLog(@"HERE");
+//        NSDictionary *
+//        [user setObject:test forKey:@"topFrom"];
+//        [user saveInBackground];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -139,14 +151,24 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PFUser *user = [PFUser currentUser];
+    NSDictionary *topFrom = [user objectForKey:@"topFrom"];
+    
+    NSString *toID = [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"];
+    
+    NSNumber *toOldCount = [topFrom objectForKey:toID];
+    int toOldCountInt = [toOldCount intValue];
+    int toNewCountInt = toOldCountInt + 1;
+    NSNumber *toNewCount = [NSNumber numberWithInt:toNewCountInt];
+    
+    [topFrom setValue:toNewCount forKey:toID];
+    [user setObject:topFrom forKey:@"topFrom"];
+    [user saveInBackground];
+    
     NSLog(@"Daps sent\nfrom: %@\nto: %@",
           [self.userData objectForKey:@"id"],
-          [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"]);
-    
-    PFObject *daps = [PFObject objectWithClassName:@"Daps"];
-    daps[@"from"] = [self.userData objectForKey:@"id"];
-    daps[@"to"] = [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"];
-    [daps saveInBackground];
+          toID);
 }
 
 @end
