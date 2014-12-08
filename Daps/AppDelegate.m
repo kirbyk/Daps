@@ -132,7 +132,9 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if (self.currentPage == 0) self.currentPage = 1;
-    else self.currentPage = 1;
+    else if (self.currentPage == 1) self.currentPage = 0;
+    
+    NSLog(@"current page: %d", self.currentPage);
 }
 
 

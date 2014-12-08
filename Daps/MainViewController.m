@@ -86,17 +86,14 @@
         FBRequest *requestFriends = [FBRequest requestForMyFriends];
         [requestFriends startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
-        
-                
                 self.friendData = [NSMutableArray array];
-                
                 for (NSDictionary *friend in result[@"data"]) {
                     [self.friendData addObject:friend];
                 }
                 
                 [self.collectionView reloadData];
                 
-            }
+            } else NSLog(@"error %@", error);
         }];
     }
 }
