@@ -96,18 +96,6 @@
             }
         }];
     }
-    
-    NSDictionary *topTo = [user objectForKey:@"topTo"];
-    NSDictionary *none = [[NSDictionary alloc] init];
-    [user setObject:none forKey:@"topTo"];
-    [user saveInBackground];
-    NSLog(@"topTo: %@", topTo);
-    if([topTo count] == 0) {
-        NSLog(@"HERE");
-//        NSDictionary *
-//        [user setObject:test forKey:@"topFrom"];
-//        [user saveInBackground];
-    }
 }
 
 #pragma mark - UICollectionViewDataSource

@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 
 #import <FacebookSDK/FacebookSDK.h>
+#import <Parse/Parse.h>
 
 @interface ProfileViewController ()
 @property (nonatomic, strong) UIImageView *mainImageView;
@@ -71,6 +72,20 @@
             attributedCount = [[NSMutableAttributedString alloc] initWithString:@"107 daps from 45 friends"];
             [attributedCount addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedCount length])];
             self.dapsCountLabel.attributedText = attributedCount;
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"Daps"];
+            [query whereKey:@"facebookId" equalTo:facebookID];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    NSMutableDictionary *fromCounts = [objects[0] objectForKey:@"fromCounts"];
+                    NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
+                    
+                    NSLog(@"fromCounts: %@", fromCounts);
+                    NSLog(@"toCounts: %@", toCounts);
+                } else {
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
             
         }
     }];
