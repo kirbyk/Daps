@@ -25,17 +25,35 @@
     [button addTarget:self
                action:@selector(loginWithFacebook)
      forControlEvents:UIControlEventTouchUpInside];
-    button.buttonColor = [UIColor turquoiseColor];
-    button.shadowColor = [UIColor greenSeaColor];
+    button.buttonColor = [UIColor peterRiverColor];
+    button.shadowColor = [UIColor belizeHoleColor];
     button.shadowHeight = 3.0f;
     button.cornerRadius = 6.0f;
-    button.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
     [button setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
-    [button setTitle:@"Sign up or login" forState:UIControlStateNormal];
+    [button setTitle:@"Continue with Facebook" forState:UIControlStateNormal];
     button.center = self.view.center;
-    button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y + 80.0f, button.frame.size.width, button.frame.size.height);
+    button.frame = CGRectMake(button.frame.origin.x, CGRectGetMaxY(self.view.frame) - 80.0f, button.frame.size.width, button.frame.size.height);
     [self.view addSubview:button];
+    
+    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_bg.jpg"]];
+    backgroundImage.frame = self.view.frame;
+    backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:backgroundImage];
+    [self.view sendSubviewToBack:backgroundImage];
+    
+    NSMutableAttributedString *attributedCount;
+    attributedCount = [[NSMutableAttributedString alloc] initWithString:@"Daps."];
+    [attributedCount addAttribute:NSKernAttributeName value:@(-7) range:NSMakeRange(0, [attributedCount length])];
+    
+    UILabel *dapsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 200.0, CGRectGetWidth(self.view.frame), 200.0)];
+    dapsLabel.attributedText = attributedCount;
+    dapsLabel.center = self.view.center;
+    dapsLabel.textAlignment = NSTextAlignmentCenter;
+    dapsLabel.textColor = [UIColor whiteColor];
+    dapsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:130.0f];
+    [self.view addSubview:dapsLabel];
     
 }
 
