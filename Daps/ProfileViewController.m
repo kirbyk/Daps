@@ -80,13 +80,30 @@
                     NSMutableDictionary *fromCounts = [objects[0] objectForKey:@"fromCounts"];
                     NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
                     
-                    NSLog(@"fromCounts: %@", fromCounts);
-                    NSLog(@"toCounts: %@", toCounts);
+                    if(fromCounts != nil) {
+                        NSArray *sortedFromCountsKeys = [self sortCountsKeys:fromCounts];
+                        NSLog(@"SortedFromCounts: %@", sortedFromCountsKeys);
+                    }
+                    
+                    if(toCounts != nil) {
+                        NSArray *sortedToCountsKeys = [self sortCountsKeys:toCounts];
+                        NSLog(@"SortedToCounts: %@", sortedToCountsKeys);
+                    }
                 } else {
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];
             
+        }
+    }];
+}
+
+-(NSArray *)sortCountsKeys:(NSMutableDictionary *)counts {
+    return [counts keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        } else {
+            return (NSComparisonResult)NSOrderedDescending;
         }
     }];
 }
