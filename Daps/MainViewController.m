@@ -97,12 +97,12 @@
         }];
     }
     
-    NSDictionary *topFrom = [user objectForKey:@"topFrom"];
+    NSDictionary *topTo = [user objectForKey:@"topTo"];
     NSDictionary *none = [[NSDictionary alloc] init];
-    [user setObject:none forKey:@"topFrom"];
+    [user setObject:none forKey:@"topTo"];
     [user saveInBackground];
-    NSLog(@"topFrom: %@", topFrom);
-    if([topFrom count] == 0) {
+    NSLog(@"topTo: %@", topTo);
+    if([topTo count] == 0) {
         NSLog(@"HERE");
 //        NSDictionary *
 //        [user setObject:test forKey:@"topFrom"];
@@ -146,24 +146,71 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *toId = [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"];
+    NSString *fromId = [self.userData objectForKey:@"id"];
     
-    PFUser *user = [PFUser currentUser];
-    NSDictionary *topFrom = [user objectForKey:@"topFrom"];
-    
-    NSString *toID = [[self.friendData objectAtIndex:indexPath.item] objectForKey:@"id"];
-    
-    NSNumber *toOldCount = [topFrom objectForKey:toID];
-    int toOldCountInt = [toOldCount intValue];
-    int toNewCountInt = toOldCountInt + 1;
-    NSNumber *toNewCount = [NSNumber numberWithInt:toNewCountInt];
-    
-    [topFrom setValue:toNewCount forKey:toID];
-    [user setObject:topFrom forKey:@"topFrom"];
-    [user saveInBackground];
-    
-    NSLog(@"Daps sent\nfrom: %@\nto: %@",
-          [self.userData objectForKey:@"id"],
-          toID);
+    [self incrementAndSendFromCountFrom:fromId to:toId];
+    [self incrementAndSendToCountFrom:fromId to:toId];
+}
+
+- (void)incrementAndSendToCountFrom:(NSString *)fromId to:(NSString *)toId {
+    PFQuery *query = [PFQuery queryWithClassName:@"Daps"];
+    [query whereKey:@"facebookId" equalTo:fromId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if([objects count] > 0) {
+                NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
+                NSNumber *currentToCount = [toCounts objectForKey:toId];
+                int currentToCountInt = [currentToCount intValue];
+                int newToCountInt = currentToCountInt + 1;
+                NSNumber *newToCount = [NSNumber numberWithInt:newToCountInt];
+                [toCounts setObject:newToCount forKey:toId];
+                    
+                objects[0][@"toCounts"] = toCounts;
+                [objects[0] saveInBackground];
+            } else {
+                NSMutableDictionary *toCounts = [[NSMutableDictionary alloc] init];
+                [toCounts setObject:[NSNumber numberWithInt:1] forKey:toId];
+                
+                PFObject *daps = [PFObject objectWithClassName:@"Daps"];
+                daps[@"facebookId"] = fromId;
+                daps[@"toCounts"] = toCounts;
+                [daps saveInBackground];
+            }
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+- (void)incrementAndSendFromCountFrom:(NSString *)fromId to:(NSString *)toId {
+    PFQuery *query = [PFQuery queryWithClassName:@"Daps"];
+    [query whereKey:@"facebookId" equalTo:toId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if([objects count] > 0) {
+                NSMutableDictionary *fromCounts = [objects[0] objectForKey:@"fromCounts"];
+                NSNumber *currentFromCount = [fromCounts objectForKey:fromId];
+                int currentFromCountInt = [currentFromCount intValue];
+                int newFromCountInt = currentFromCountInt + 1;
+                NSNumber *newFromCount = [NSNumber numberWithInt:newFromCountInt];
+                [fromCounts setObject:newFromCount forKey:fromId];
+                
+                objects[0][@"fromCounts"] = fromCounts;
+                [objects[0] saveInBackground];
+            } else {
+                NSMutableDictionary *fromCounts = [[NSMutableDictionary alloc] init];
+                [fromCounts setObject:[NSNumber numberWithInt:1] forKey:fromId];
+                
+                PFObject *daps = [PFObject objectWithClassName:@"Daps"];
+                daps[@"facebookId"] = toId;
+                daps[@"fromCounts"] = fromCounts;
+                [daps saveInBackground];
+            }
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 @end
