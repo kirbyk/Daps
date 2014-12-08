@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "LoginViewController.h"
 #import "FriendsCollectionViewCell.h"
+#import "AppDelegate.h"
 
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
+    self.navigationController.navigationBar.hidden = YES;
     
     // data source
     self.friendData = [NSMutableArray array];
@@ -43,7 +45,6 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
     [self.collectionView registerClass:[FriendsCollectionViewCell class] forCellWithReuseIdentifier:@"friendCellIdentifier"];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,24 +60,36 @@
     // if there is no active user, prompt login
     if (!user) {
         LoginViewController *loginViewController = [[LoginViewController alloc] init];
-        [self presentViewController:loginViewController animated:YES completion:nil];
-    } else {        
+        UIViewController *rootController =(UIViewController*)[[(AppDelegate *)[[UIApplication sharedApplication]delegate] window] rootViewController];
+        [rootController presentViewController:loginViewController animated:YES completion:nil];
+    } else {
+        
+        FBRequest *requestMe = [FBRequest requestForMe];
+        [requestMe startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                
+                // result is a dictionary with the user's Facebook data
+                self.userData = (NSDictionary *)result;
+                
+                //NSString *name = self.userData[@"name"];
+                //[user setObject:name forKeyedSubscript:@"name"];
+                //[user saveInBackground];
+                //NSString *facebookID = self.userData[@"id"];
+                //NSString *location = self.userData[@"location"][@"name"];
+                //NSLog(@"USERNAME: %@", name);
+            }
+        }];
+        
         FBRequest *requestFriends = [FBRequest requestForMyFriends];
         [requestFriends startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
         
+                
+                self.friendData = [NSMutableArray array];
+                
                 for (NSDictionary *friend in result[@"data"]) {
                     [self.friendData addObject:friend];
                 }
-                
-#warning add more friends (this is adding Kirby i times)
-                [self.friendData addObject:self.userData];
-                [self.friendData addObject:self.userData];
-                [self.friendData addObject:[self.friendData objectAtIndex:0]];
-                [self.friendData addObject:[self.friendData objectAtIndex:0]];
-                [self.friendData addObject:self.userData];
-                [self.friendData addObject:self.userData];
-                [self.friendData addObject:[self.friendData objectAtIndex:0]];
                 
                 [self.collectionView reloadData];
                 

@@ -8,14 +8,43 @@
 
 #import "ProfileViewController.h"
 
+#import "UIImageView+WebCache.h"
+
 #import <FacebookSDK/FacebookSDK.h>
+
+@interface ProfileViewController ()
+@property (nonatomic, strong) UIImageView *mainImageView;
+@property (nonatomic, strong) UILabel *mainNameLabel;
+@property (nonatomic, strong) UILabel *dapsCountLabel;
+
+@property (nonatomic, strong) NSDictionary *userData;
+@end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.hidden = YES;
+    
+    // setup main profile picture
+    self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0, 20.0, 80.0, 80.0)];
+    self.mainImageView.layer.cornerRadius = 5.0;
+    self.mainImageView.layer.masksToBounds = YES;
+    [self.view addSubview:self.mainImageView];
+    
+    // name label
+    self.mainNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mainImageView.frame) + 20.0, CGRectGetMinY(self.mainImageView.frame) + 10.0, CGRectGetWidth(self.view.frame) - CGRectGetMaxX(self.mainImageView.frame) - 20, 30.0)];
+    self.mainNameLabel.textColor = [UIColor colorWithWhite:(25.0f/255.0f) alpha:1.0];
+    self.mainNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
+    [self.view addSubview:self.mainNameLabel];
+    
+    // daps count label
+    self.dapsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.mainNameLabel.frame), CGRectGetMaxY(self.mainNameLabel.frame), CGRectGetWidth(self.view.frame), 20.0)];
+    self.dapsCountLabel.textColor = [UIColor colorWithWhite:(65.0f/255.0f) alpha:1.0];
+    self.dapsCountLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
+    [self.view addSubview:self.dapsCountLabel];
     
 }
 
@@ -26,16 +55,23 @@
         if (!error) {
             
             // result is a dictionary with the user's Facebook data
-            //self.userData = (NSDictionary *)result;
+            self.userData = (NSDictionary *)result;
             
-            //NSString *name = self.userData[@"name"];
-            //[user setObject:name forKeyedSubscript:@"name"];
-            //[user saveInBackground];
-            //NSString *facebookID = self.userData[@"id"];
-            //NSString *location = self.userData[@"location"][@"name"];
-            //NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            // update UI
+            NSString *facebookID = self.userData[@"id"];
+            NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            [self.mainImageView sd_setImageWithURL:imageURL];
             
-            //NSLog(@"USERNAME: %@", name);
+            NSMutableAttributedString *attributedString;
+            attributedString = [[NSMutableAttributedString alloc] initWithString:self.userData[@"name"]];
+            [attributedString addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedString length])];
+            self.mainNameLabel.attributedText = attributedString;
+            
+            NSMutableAttributedString *attributedCount;
+            attributedCount = [[NSMutableAttributedString alloc] initWithString:@"107 daps from 45 friends"];
+            [attributedCount addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedCount length])];
+            self.dapsCountLabel.attributedText = attributedCount;
+            
         }
     }];
 }

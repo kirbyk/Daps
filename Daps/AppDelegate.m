@@ -35,9 +35,7 @@
     [application registerForRemoteNotifications];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    
-    [self.window makeKeyAndVisible];
+    self.window.backgroundColor = [UIColor blackColor];
     
     self.currentPage = 0;
     
@@ -50,8 +48,12 @@
     self.viewControllers = [NSArray arrayWithObjects:mainViewController, profileViewController, nil];
     [pageViewController setViewControllers:@[mainViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
-    self.window.rootViewController = pageViewController;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pageViewController];
+    self.window.rootViewController = navigationController;
+    navigationController.navigationBar.hidden = YES;
     
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 

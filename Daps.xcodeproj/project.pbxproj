@@ -30,6 +30,7 @@
 		4EA7C0001A350AA500F4CB77 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7BFFF1A350AA500F4CB77 /* Info.plist */; };
 		4EDEF0771A2D5E930026997E /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */; };
 		8960CAE01A350DA1009EC0F0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8960CADF1A350DA1009EC0F0 /* ProfileViewController.m */; };
+		8960CAE21A3542FE009EC0F0 /* login_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8960CAE11A3542FE009EC0F0 /* login_bg.jpg */; };
 		89A569BF1A2E7FD40001D91E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A569BE1A2E7FD40001D91E /* Images.xcassets */; };
 		89B3D6301A30E85F00A26540 /* FriendsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B3D62F1A30E85F00A26540 /* FriendsCollectionViewCell.m */; };
 		89B3D6531A30EE6100A26540 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B3D6331A30EE6100A26540 /* MKAnnotationView+WebCache.m */; };
@@ -115,6 +116,7 @@
 		4EDEF0761A2D5E930026997E /* FriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewController.m; sourceTree = "<group>"; };
 		8960CADE1A350DA1009EC0F0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		8960CADF1A350DA1009EC0F0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		8960CAE11A3542FE009EC0F0 /* login_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_bg.jpg; sourceTree = "<group>"; };
 		89A569BE1A2E7FD40001D91E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		89B3D62E1A30E85F00A26540 /* FriendsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsCollectionViewCell.h; sourceTree = "<group>"; };
 		89B3D62F1A30E85F00A26540 /* FriendsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsCollectionViewCell.m; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 		89D953771A2FFAED00D01760 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				8960CAE11A3542FE009EC0F0 /* login_bg.jpg */,
 				89B3D6311A30EE6100A26540 /* SDWebImage */,
 				89D953781A2FFAED00D01760 /* FlatUIKit */,
 			);
@@ -507,6 +510,7 @@
 			files = (
 				89A569BF1A2E7FD40001D91E /* Images.xcassets in Resources */,
 				89D953AC1A2FFAED00D01760 /* Lato-Italic.ttf in Resources */,
+				8960CAE21A3542FE009EC0F0 /* login_bg.jpg in Resources */,
 				4EA7C0001A350AA500F4CB77 /* Info.plist in Resources */,
 				89D953AE1A2FFAED00D01760 /* Lato-Regular.ttf in Resources */,
 				89D953AB1A2FFAED00D01760 /* Lato-Bold.ttf in Resources */,
@@ -675,7 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iOS Development: Kirby Kohlmorgen (TBKN645J8A)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Austin Louden (TSG5K89BMR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kirby/Downloads/parse-library-1.5.0",
@@ -695,7 +699,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iOS Development: Kirby Kohlmorgen (TBKN645J8A)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Austin Louden (TSG5K89BMR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kirby/Downloads/parse-library-1.5.0",
