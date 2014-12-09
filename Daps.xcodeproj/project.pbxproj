@@ -72,6 +72,9 @@
 		89D953B81A2FFAED00D01760 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D9539F1A2FFAED00D01760 /* UITabBar+FlatUI.m */; };
 		89D953B91A2FFAED00D01760 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D953A11A2FFAED00D01760 /* UITableViewCell+FlatUI.m */; };
 		89D953BA1A2FFAED00D01760 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D953A31A2FFAED00D01760 /* UIToolbar+FlatUI.m */; };
+		89EC31681A365BDC0003803C /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EC31631A365BDC0003803C /* SVIndefiniteAnimatedView.m */; };
+		89EC31691A365BDC0003803C /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 89EC31651A365BDC0003803C /* SVProgressHUD.bundle */; };
+		89EC316A1A365BDC0003803C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EC31671A365BDC0003803C /* SVProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +199,12 @@
 		89D953A11A2FFAED00D01760 /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
 		89D953A21A2FFAED00D01760 /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
 		89D953A31A2FFAED00D01760 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
+		89EC31621A365BDC0003803C /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		89EC31631A365BDC0003803C /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		89EC31641A365BDC0003803C /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		89EC31651A365BDC0003803C /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		89EC31661A365BDC0003803C /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		89EC31671A365BDC0003803C /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +380,7 @@
 		89D953771A2FFAED00D01760 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				89EC31611A365BDC0003803C /* SVProgressHUD */,
 				8960CAE11A3542FE009EC0F0 /* login_bg.jpg */,
 				89B3D6311A30EE6100A26540 /* SDWebImage */,
 				89D953781A2FFAED00D01760 /* FlatUIKit */,
@@ -426,6 +436,19 @@
 				89D953A31A2FFAED00D01760 /* UIToolbar+FlatUI.m */,
 			);
 			path = FlatUIKit;
+			sourceTree = "<group>";
+		};
+		89EC31611A365BDC0003803C /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				89EC31621A365BDC0003803C /* SVIndefiniteAnimatedView.h */,
+				89EC31631A365BDC0003803C /* SVIndefiniteAnimatedView.m */,
+				89EC31641A365BDC0003803C /* SVProgressHUD-Prefix.pch */,
+				89EC31651A365BDC0003803C /* SVProgressHUD.bundle */,
+				89EC31661A365BDC0003803C /* SVProgressHUD.h */,
+				89EC31671A365BDC0003803C /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -511,6 +534,7 @@
 				89A569BF1A2E7FD40001D91E /* Images.xcassets in Resources */,
 				89D953AC1A2FFAED00D01760 /* Lato-Italic.ttf in Resources */,
 				8960CAE21A3542FE009EC0F0 /* login_bg.jpg in Resources */,
+				89EC31691A365BDC0003803C /* SVProgressHUD.bundle in Resources */,
 				4EA7C0001A350AA500F4CB77 /* Info.plist in Resources */,
 				89D953AE1A2FFAED00D01760 /* Lato-Regular.ttf in Resources */,
 				89D953AB1A2FFAED00D01760 /* Lato-Bold.ttf in Resources */,
@@ -541,6 +565,7 @@
 				4E48D1D61A2D3B0D003244FA /* LoginViewController.m in Sources */,
 				89B3D6541A30EE6100A26540 /* NSData+ImageContentType.m in Sources */,
 				89D953B41A2FFAED00D01760 /* UIPopoverController+FlatUI.m in Sources */,
+				89EC316A1A365BDC0003803C /* SVProgressHUD.m in Sources */,
 				89D953A71A2FFAED00D01760 /* FUIPopoverBackgroundView.m in Sources */,
 				89B3D65C1A30EE6100A26540 /* UIButton+WebCache.m in Sources */,
 				89B3D65B1A30EE6100A26540 /* SDWebImagePrefetcher.m in Sources */,
@@ -566,6 +591,7 @@
 				89D953B71A2FFAED00D01760 /* UIStepper+FlatUI.m in Sources */,
 				89B3D6571A30EE6100A26540 /* SDWebImageDecoder.m in Sources */,
 				89B3D65F1A30EE6100A26540 /* UIImage+WebP.m in Sources */,
+				89EC31681A365BDC0003803C /* SVIndefiniteAnimatedView.m in Sources */,
 				89B3D6561A30EE6100A26540 /* SDWebImageCompat.m in Sources */,
 				89D953B51A2FFAED00D01760 /* UIProgressView+FlatUI.m in Sources */,
 				4E48D1941A2D3292003244FA /* AppDelegate.m in Sources */,

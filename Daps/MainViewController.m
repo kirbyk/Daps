@@ -14,6 +14,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "SVProgressHUD.h"
 #import "UIImageView+WebCache.h"
 
 #define HEADER_HEIGHT 90
@@ -29,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     // data source
     self.friendData = [NSMutableArray array];
@@ -70,16 +71,7 @@
         FBRequest *requestMe = [FBRequest requestForMe];
         [requestMe startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
-                
-                // result is a dictionary with the user's Facebook data
                 self.userData = (NSDictionary *)result;
-                
-                //NSString *name = self.userData[@"name"];
-                //[user setObject:name forKeyedSubscript:@"name"];
-                //[user saveInBackground];
-                //NSString *facebookID = self.userData[@"id"];
-                //NSString *location = self.userData[@"location"][@"name"];
-                //NSLog(@"USERNAME: %@", name);
             }
         }];
         
@@ -91,6 +83,7 @@
                     [self.friendData addObject:friend];
                 }
                 
+                NSLog(@"%@", self.friendData);
                 [self.collectionView reloadData];
                 
             } else NSLog(@"error %@", error);
@@ -138,6 +131,15 @@
     
     [self incrementAndSendFromCountFrom:fromId to:toId];
     [self incrementAndSendToCountFrom:fromId to:toId];
+    
+    PFUser *user = [PFUser currentUser];
+    NSString *fromName = [self friendNameFormatter:[user objectForKey:@"name"]];
+    NSString *message = [@"👊 from " stringByAppendingString:fromName];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setChannel:@"global"];
+    [push setMessage:message];
+    [push sendPushInBackground];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
@@ -183,10 +185,16 @@
 #pragma mark - Model Methods
 
 - (void)incrementAndSendToCountFrom:(NSString *)fromId to:(NSString *)toId {
+    
+    [SVProgressHUD show];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Daps"];
     [query whereKey:@"facebookId" equalTo:fromId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"Daps sent!"];
+            
             if([objects count] > 0) {
                 NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
                 NSNumber *currentToCount = [toCounts objectForKey:toId];
@@ -240,6 +248,13 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+- (NSString *)friendNameFormatter:(NSString *)name
+{
+    NSString *betterName = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    betterName = [betterName uppercaseString];
+    return betterName;
 }
 
 @end

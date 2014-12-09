@@ -13,6 +13,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 
+#define PROFILE_HEADER_HEIGHT 90
+
 @interface ProfileViewController ()
 @property (nonatomic, strong) UIImageView *mainImageView;
 @property (nonatomic, strong) UILabel *mainNameLabel;
@@ -26,10 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     self.navigationController.navigationBar.hidden = YES;
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), 90.0)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), PROFILE_HEADER_HEIGHT)];
     headerView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:headerView];
     
@@ -44,9 +46,9 @@
     [headerView addSubview:self.dapsCountLabel];
     
     // setup main profile picture
-    self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0, 200.0, 80.0, 80.0)];
-    self.mainImageView.layer.cornerRadius = 5.0;
-    self.mainImageView.layer.masksToBounds = YES;
+    self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, PROFILE_HEADER_HEIGHT, CGRectGetWidth(self.view.frame), 180.0)];
+    self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.mainImageView.clipsToBounds = YES;
     [self.view addSubview:self.mainImageView];
     
 }
@@ -70,20 +72,27 @@
             [attributedString addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedString length])];
             self.mainNameLabel.attributedText = attributedString;
             
-            NSMutableAttributedString *attributedCount;
-            attributedCount = [[NSMutableAttributedString alloc] initWithString:@"107"];
-            [attributedCount addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedCount length])];
-            self.dapsCountLabel.attributedText = attributedCount;
             
             PFQuery *query = [PFQuery queryWithClassName:@"Daps"];
             [query whereKey:@"facebookId" equalTo:facebookID];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
                     
-                    NSLog(@"%@", objects);
-                    
                     NSMutableDictionary *fromCounts = [objects[0] objectForKey:@"fromCounts"];
                     NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
+                    
+                    NSLog(@"%@", fromCounts);
+                    
+                    // get the total count of daps for the user
+                    int dapsCount = 0;
+                    for (NSString *key in [fromCounts allKeys]) {
+                        dapsCount += [[fromCounts objectForKey:key] intValue];
+                    }
+                    
+                    NSMutableAttributedString *attributedCount;
+                    attributedCount = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", dapsCount]];
+                    [attributedCount addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedCount length])];
+                    self.dapsCountLabel.attributedText = attributedCount;
                     
                     if(fromCounts != nil) {
                         NSArray *sortedFromCountsKeys = [self sortCountsKeys:fromCounts];

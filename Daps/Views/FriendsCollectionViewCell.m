@@ -19,7 +19,7 @@
 {
     if (self = [super initWithFrame:frame]) {
     
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.frame)-2.0, CGRectGetHeight(self.frame)-2.0)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.frame)-3.0, CGRectGetHeight(self.frame)-3.0)];
         self.imageView.center = self.contentView.center;
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
