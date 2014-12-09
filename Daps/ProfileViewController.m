@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UILabel *dapsCountLabel;
 @property (nonatomic, strong) NSMutableArray *friendData;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *topFriends;
 
 @property (nonatomic, strong) NSDictionary *userData;
 @end
@@ -92,12 +93,12 @@
     
     // top friends label
     UILabel *topFriendsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, CGRectGetMaxY(self.mainImageView.frame), CGRectGetWidth(self.view.frame), 40.0)];
-    topFriendsLabel.textColor = [UIColor whiteColor];
-    topFriendsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
+    topFriendsLabel.textColor = [UIColor colorWithWhite:(215.0/255.0) alpha:1.0];
+    topFriendsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
     [self.view addSubview:topFriendsLabel];
     
     NSMutableAttributedString *topFriendsString;
-    topFriendsString = [[NSMutableAttributedString alloc] initWithString:@"Top Friends"];
+    topFriendsString = [[NSMutableAttributedString alloc] initWithString:@"TOP FRIENDS"];
     [topFriendsString addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedString length])];
     topFriendsLabel.attributedText = topFriendsString;
     
@@ -119,6 +120,7 @@
             
             // result is a dictionary with the user's Facebook data
             self.userData = (NSDictionary *)result;
+            self.topFriends = [NSMutableArray array];
             
             // set the profile images (blurred and clear)
             NSString *facebookID = self.userData[@"id"];
@@ -148,28 +150,27 @@
                         dapsCount += [[fromCounts objectForKey:key] intValue];
                     }
                     
+                    // set the count number in the header
                     NSMutableAttributedString *attributedCount;
                     attributedCount = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", dapsCount]];
                     [attributedCount addAttribute:NSKernAttributeName value:@(-2) range:NSMakeRange(0, [attributedCount length])];
                     self.dapsCountLabel.attributedText = attributedCount;
                     
+                    // set the subtitle string
                     NSMutableAttributedString *attributedSubtitle;
                     attributedSubtitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d daps from %d friends", dapsCount, (int)[fromCounts count]]];
                     [attributedSubtitle addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedCount length])];
                     self.subtitleLabel.attributedText = attributedSubtitle;
                     
+                    // sort the friends by order of importance (most daps)
                     NSArray *sortedFromCountsKeys = [NSArray array];
                     if(fromCounts != nil) {
-                        NSArray *sortedFromCountsKeys = [self sortCountsKeys:fromCounts];
-                        NSLog(@"SortedFromCounts: %@", sortedFromCountsKeys);
+                        sortedFromCountsKeys = [self sortCountsKeys:fromCounts];
                     }
                     
-                    if(toCounts != nil) {
-                        NSArray *sortedToCountsKeys = [self sortCountsKeys:toCounts];
-                        NSLog(@"SortedToCounts: %@", sortedToCountsKeys);
-                    }
+                    NSLog(@"SortedFromCounts: %@", sortedFromCountsKeys);
                     
-                    
+                    // get details of friends
                     FBRequest *requestFriends = [FBRequest requestForMyFriends];
                     [requestFriends startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                         if (!error) {
@@ -178,10 +179,21 @@
                                 [self.friendData addObject:friend];
                             }
                             
+                            //NSLog(@"%@", self.friendData);
+                            
                             for (NSString *facebookID in sortedFromCountsKeys) {
                                 int count = [[fromCounts objectForKey:facebookID] intValue];
+                                NSString *name;
+                                for (NSDictionary *friend in self.friendData) {
+                                    if([facebookID isEqualToString:friend[@"id"]])
+                                        name = friend[@"name"];
+                                }
                                 
+                                [self.topFriends addObject:@{name: [NSNumber numberWithInt:count]}];
                             }
+                            
+                            NSLog(@"%@", self.topFriends);
+                            [self.tableView reloadData];
                             
                         } else NSLog(@"error %@", error);
                     }];
@@ -209,13 +221,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [self.topFriends count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.textLabel.text = @"blalsd";
+    if (self.topFriends.count > 0) {
+        cell.textLabel.text = [[[self.topFriends objectAtIndex:indexPath.row] allKeys] objectAtIndex:0];
+    }
     return cell;
 }
 
