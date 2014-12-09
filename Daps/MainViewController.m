@@ -83,7 +83,6 @@
                     [self.friendData addObject:friend];
                 }
                 
-                NSLog(@"%@", self.friendData);
                 [self.collectionView reloadData];
                 
             } else NSLog(@"error %@", error);
@@ -101,11 +100,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FriendsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"friendCellIdentifier" forIndexPath:indexPath];
-    
-    // need to determine whether content should be drawn left, center, or right
-    
-    //if (indexPath.section % 2 == 0) cell.backgroundColor = [UIColor blueColor];
-    //else cell.backgroundColor = [UIColor orangeColor];
     
     NSString *facebookID = [[self.friendData objectAtIndex:indexPath.row] objectForKey:@"id"];
     NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];

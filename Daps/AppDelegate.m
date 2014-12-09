@@ -133,8 +133,6 @@
 {
     if (self.currentPage == 0) self.currentPage = 1;
     else if (self.currentPage == 1) self.currentPage = 0;
-    
-    NSLog(@"current page: %d", self.currentPage);
 }
 
 
