@@ -106,6 +106,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(topFriendsLabel.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-CGRectGetMaxY(topFriendsLabel.frame)) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
@@ -179,7 +180,7 @@
                                 [self.friendData addObject:friend];
                             }
                             
-                            //NSLog(@"%@", self.friendData);
+                            NSLog(@"%@", self.friendData);
                             
                             for (NSString *facebookID in sortedFromCountsKeys) {
                                 int count = [[fromCounts objectForKey:facebookID] intValue];
@@ -227,8 +228,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
+    UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40.0, 0.0, 40.0, cell.contentView.frame.size.height)];
+    countLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
+    countLabel.textColor = [UIColor redColor];
+    [cell.contentView addSubview:countLabel];
+    
     if (self.topFriends.count > 0) {
         cell.textLabel.text = [[[self.topFriends objectAtIndex:indexPath.row] allKeys] objectAtIndex:0];
+        countLabel.text = [NSString stringWithFormat:@"%@", [[self.topFriends objectAtIndex:indexPath.row] objectForKey:cell.textLabel.text]];
     }
     return cell;
 }
