@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+#import "MainViewController.h"
+#import "PageViewController.h"
 
 #import "FUIButton.h"
 #import "UIColor+FlatUI.h"
@@ -52,7 +54,7 @@
     dapsLabel.center = self.view.center;
     dapsLabel.textAlignment = NSTextAlignmentCenter;
     dapsLabel.textColor = [UIColor whiteColor];
-    dapsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:130.0f];
+    dapsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:90.0f];
     [self.view addSubview:dapsLabel];
     
 }
@@ -64,9 +66,15 @@
         if (!user) {
             NSLog(@"The user cancelled the Facebook login. %@", error);
         } else if (user.isNew) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            PageViewController *pageViewController = (PageViewController *)self.presentingViewController;
+            [self dismissViewControllerAnimated: YES completion: ^{
+                [(MainViewController *)[pageViewController.viewControllers objectAtIndex:0] refreshUserData];
+            }];
         } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            PageViewController *pageViewController = (PageViewController *)self.presentingViewController;
+            [self dismissViewControllerAnimated: YES completion: ^{
+                [(MainViewController *)[pageViewController.viewControllers objectAtIndex:0] refreshUserData];
+            }];
         }
     }];
 }

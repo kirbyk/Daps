@@ -53,6 +53,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self refreshUserData];
 }
 
@@ -63,9 +64,6 @@
     
     // if there is no active user, prompt login
     if (!user) {
-        LoginViewController *loginViewController = [[LoginViewController alloc] init];
-        UIViewController *rootController =(UIViewController*)[[(AppDelegate *)[[UIApplication sharedApplication]delegate] window] rootViewController];
-        [rootController presentViewController:loginViewController animated:YES completion:nil];
     } else {
         
         FBRequest *requestMe = [FBRequest requestForMe];

@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "TopFriendsTableViewCell.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -102,6 +103,9 @@
     [topFriendsString addAttribute:NSKernAttributeName value:@(-1) range:NSMakeRange(0, [attributedString length])];
     topFriendsLabel.attributedText = topFriendsString;
     
+    // initialize datasource
+    self.topFriends = [NSMutableArray array];
+    
     // top friends table
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(topFriendsLabel.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-CGRectGetMaxY(topFriendsLabel.frame)) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
@@ -109,7 +113,7 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
+    [self.tableView registerClass:[TopFriendsTableViewCell class] forCellReuseIdentifier:@"topFriendsIdentifier"];
     
 }
 
@@ -121,7 +125,6 @@
             
             // result is a dictionary with the user's Facebook data
             self.userData = (NSDictionary *)result;
-            self.topFriends = [NSMutableArray array];
             
             // set the profile images (blurred and clear)
             NSString *facebookID = self.userData[@"id"];
@@ -141,9 +144,6 @@
                 if (!error) {
                     
                     NSMutableDictionary *fromCounts = [objects[0] objectForKey:@"fromCounts"];
-                    NSMutableDictionary *toCounts = [objects[0] objectForKey:@"toCounts"];
-                    
-                    NSLog(@"%@", fromCounts);
                     
                     // get the total count of daps for the user
                     int dapsCount = 0;
@@ -180,21 +180,23 @@
                                 [self.friendData addObject:friend];
                             }
                             
-                            NSLog(@"%@", self.friendData);
+                            //NSLog(@"%@", self.friendData);
                             
                             for (NSString *facebookID in sortedFromCountsKeys) {
                                 int count = [[fromCounts objectForKey:facebookID] intValue];
                                 NSString *name;
                                 for (NSDictionary *friend in self.friendData) {
-                                    if([facebookID isEqualToString:friend[@"id"]])
+                                    if([facebookID isEqualToString:friend[@"id"]]) {
                                         name = friend[@"name"];
+                                    }
                                 }
                                 
                                 [self.topFriends addObject:@{name: [NSNumber numberWithInt:count]}];
+                                [self.tableView reloadData];
                             }
                             
-                            NSLog(@"%@", self.topFriends);
-                            [self.tableView reloadData];
+                            //NSLog(@"TOP FRIENDS: %@", self.topFriends);
+                            
                             
                         } else NSLog(@"error %@", error);
                     }];
@@ -227,17 +229,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-    UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40.0, 0.0, 40.0, cell.contentView.frame.size.height)];
-    countLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
-    countLabel.textColor = [UIColor redColor];
-    [cell.contentView addSubview:countLabel];
-    
+    TopFriendsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"topFriendsIdentifier" forIndexPath:indexPath];
     if (self.topFriends.count > 0) {
-        cell.textLabel.text = [[[self.topFriends objectAtIndex:indexPath.row] allKeys] objectAtIndex:0];
-        countLabel.text = [NSString stringWithFormat:@"%@", [[self.topFriends objectAtIndex:indexPath.row] objectForKey:cell.textLabel.text]];
+        cell.nameLabel.text = [[[self.topFriends objectAtIndex:indexPath.row] allKeys] objectAtIndex:0];
+        cell.countLabel.text = [NSString stringWithFormat:@"%@", [[self.topFriends objectAtIndex:indexPath.row] objectForKey:cell.nameLabel.text]];
     }
+    
     return cell;
 }
 

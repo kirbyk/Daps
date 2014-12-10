@@ -10,6 +10,7 @@
 
 #import "MainViewController.h"
 #import "ProfileViewController.h"
+#import "PageViewController.h"
 
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
@@ -36,23 +37,21 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
     
+    // create the page view controller
     self.currentPage = 0;
-    
-    UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    PageViewController *pageViewController = [[PageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     pageViewController.dataSource = self;
     pageViewController.delegate = self;
     
+    // create the main and profile view controllers
     MainViewController *mainViewController = [[MainViewController alloc] init];
     ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
     self.viewControllers = [NSArray arrayWithObjects:mainViewController, profileViewController, nil];
     [pageViewController setViewControllers:@[mainViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    self.window.rootViewController = pageViewController;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pageViewController];
-    self.window.rootViewController = navigationController;
-    navigationController.navigationBar.hidden = YES;
-    
-    [self.window makeKeyAndVisible];
 
     return YES;
 }
@@ -134,7 +133,5 @@
     if (self.currentPage == 0) self.currentPage = 1;
     else if (self.currentPage == 1) self.currentPage = 0;
 }
-
-
 
 @end
