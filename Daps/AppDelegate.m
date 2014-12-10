@@ -48,7 +48,9 @@
     // create the main and profile view controllers
     MainViewController *mainViewController = [[MainViewController alloc] init];
     ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
-    self.viewControllers = [NSArray arrayWithObjects:mainViewController, profileViewController, nil];
+    self.viewControllers = @[mainViewController, profileViewController];
+    
+    // set the pages and the root controller
     [pageViewController setViewControllers:@[mainViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     self.window.rootViewController = pageViewController;
     
@@ -130,8 +132,15 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    if (self.currentPage == 0) self.currentPage = 1;
-    else if (self.currentPage == 1) self.currentPage = 0;
+    
+    UIViewController *currentView = [pageViewController.viewControllers objectAtIndex:0];
+    if ([currentView isKindOfClass:[MainViewController class]]) {
+        self.currentPage = 0;
+    } else if ([currentView isKindOfClass:[ProfileViewController class]]) {
+        self.currentPage = 1;
+    }
+    
+    
 }
 
 @end

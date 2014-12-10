@@ -37,10 +37,13 @@
     self.view.backgroundColor = [UIColor blackColor];
     self.navigationController.navigationBar.hidden = YES;
     
+    CGFloat height = PROFILE_HEADER_HEIGHT + CGRectGetWidth(self.view.frame) + 40.0;
+    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), height)];
+    
     // header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), PROFILE_HEADER_HEIGHT)];
     headerView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:headerView];
+    [tableHeaderView addSubview:headerView];
     
     // profile label
     UILabel *profileLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, CGRectGetWidth(self.view.frame), 45)];
@@ -63,7 +66,7 @@
     self.mainImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, PROFILE_HEADER_HEIGHT, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame))];
     self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.mainImageView.clipsToBounds = YES;
-    [self.view addSubview:self.mainImageView];
+    [tableHeaderView addSubview:self.mainImageView];
     
     UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -76,27 +79,27 @@
     self.subImageView.layer.cornerRadius = CGRectGetWidth(self.subImageView.frame)/2.0;
     self.subImageView.layer.masksToBounds = YES;
     self.subImageView.frame = CGRectMake(self.subImageView.frame.origin.x, PROFILE_HEADER_HEIGHT + 70, CGRectGetWidth(self.subImageView.frame), CGRectGetHeight(self.subImageView.frame));
-    [self.view addSubview:self.subImageView];
+    [tableHeaderView addSubview:self.subImageView];
     
     // main name label
     self.mainNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(self.subImageView.frame)+10.0, CGRectGetWidth(self.view.frame), 30.0)];
     self.mainNameLabel.textAlignment = NSTextAlignmentCenter;
     self.mainNameLabel.textColor = [UIColor whiteColor];
     self.mainNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
-    [self.view addSubview:self.mainNameLabel];
+    [tableHeaderView addSubview:self.mainNameLabel];
     
     // subtitle label (x daps from y friends)
     self.subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(self.mainNameLabel.frame)-5, CGRectGetWidth(self.view.frame), 30.0)];
     self.subtitleLabel.textAlignment = NSTextAlignmentCenter;
     self.subtitleLabel.textColor = [UIColor colorWithWhite:(215.0/255.0) alpha:1.0];
     self.subtitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
-    [self.view addSubview:self.subtitleLabel];
+    [tableHeaderView addSubview:self.subtitleLabel];
     
     // top friends label
     UILabel *topFriendsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, CGRectGetMaxY(self.mainImageView.frame), CGRectGetWidth(self.view.frame), 40.0)];
     topFriendsLabel.textColor = [UIColor colorWithWhite:(215.0/255.0) alpha:1.0];
     topFriendsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-    [self.view addSubview:topFriendsLabel];
+    [tableHeaderView addSubview:topFriendsLabel];
     
     NSMutableAttributedString *topFriendsString;
     topFriendsString = [[NSMutableAttributedString alloc] initWithString:@"TOP FRIENDS"];
@@ -107,10 +110,12 @@
     self.topFriends = [NSMutableArray array];
     
     // top friends table
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(topFriendsLabel.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-CGRectGetMaxY(topFriendsLabel.frame)) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.backgroundColor = [UIColor blackColor];
+    self.tableView.tableHeaderView = tableHeaderView;
     [self.view addSubview:self.tableView];
     
     [self.tableView registerClass:[TopFriendsTableViewCell class] forCellReuseIdentifier:@"topFriendsIdentifier"];
@@ -169,7 +174,7 @@
                         sortedFromCountsKeys = [self sortCountsKeys:fromCounts];
                     }
                     
-                    NSLog(@"SortedFromCounts: %@", sortedFromCountsKeys);
+                    //NSLog(@"SortedFromCounts: %@", sortedFromCountsKeys);
                     
                     // get details of friends
                     FBRequest *requestFriends = [FBRequest requestForMyFriends];
@@ -181,7 +186,7 @@
                             }
                             
                             //NSLog(@"%@", self.friendData);
-                            
+                            self.topFriends = [NSMutableArray array];
                             for (NSString *facebookID in sortedFromCountsKeys) {
                                 int count = [[fromCounts objectForKey:facebookID] intValue];
                                 NSString *name;
